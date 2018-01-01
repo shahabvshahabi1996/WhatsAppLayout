@@ -1,7 +1,12 @@
 import React , { Component } from 'react';
 import {View , Text , ViewPagerAndroid} from 'react-native';
 
-var tabs = [{name : 'CHATS'},{name : 'STATUS'},{name : 'CALLS'}]
+import Chats from './Chats';
+import Calls from './Calls';
+import Status from './Status';
+
+var tabs = [{name : 'CHATS'},{name : 'STATUS'},{name : 'CALLS'}];
+
 export default class Tabs extends Component{
     state = {
         activeIndex : 0
@@ -33,15 +38,15 @@ export default class Tabs extends Component{
                 <ViewPagerAndroid
                 style={styles.viewPager}
                 onPageSelected={(event)=>{console.log(event.nativeEvent.position);this.setState({activeIndex:event.nativeEvent.position})}}
-                initialPage={0}>
+                initialPage={this.state.activeIndex}>
                     <View style={styles.pageStyle} key="1">
-                        <Text>First page</Text>
+                        <Chats/>
                     </View>
                     <View style={styles.pageStyle} key="2">
-                        <Text>Second page</Text>
+                       <Status/>
                     </View>
                     <View style={styles.pageStyle} key="3">
-                        <Text>Third page</Text>
+                        <Calls/>
                     </View>
                 </ViewPagerAndroid>
             </View>
@@ -54,7 +59,6 @@ const styles = {
       flex: 1
     },
     pageStyle: {
-      alignItems: 'center',
-      padding: 20,
+      padding: 0,
     }
 }
